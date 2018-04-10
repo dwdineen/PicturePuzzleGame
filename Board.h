@@ -12,12 +12,14 @@
 class Board {
 
 	int sideLen = 3;
+	std::string imageStr;
 	std::vector<Tile*> tileVec;
 
+	bool swap(int row1, int col1, int row2, int col2);
 
 public:
 
-	static enum Dir {
+	enum Dir {
 		UP,
 		DOWN,
 		LEFT,
@@ -27,10 +29,9 @@ public:
 	Board(); //Default Constructor
 	Board(int n, std::string pName); //with board size and picture
 
-	void move(Dir direction);
-	void shuffle();
+	bool move(Dir direction);
+	void shuffle(int n = 200); //Make n random moves
 	bool isSolved();
-
 
 	~Board();
 private:
