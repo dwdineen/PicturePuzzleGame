@@ -15,7 +15,14 @@ class Board {
 	std::string imageStr;
 	std::vector<Tile*> tileVec;
 
+	// Holds a pointer to the last tile that was moved
+	Tile * lastMoved;
+
+
 	bool swap(int row1, int col1, int row2, int col2);
+
+	Tile * get(int row, int col);
+	void set(int row, int col, Tile * ptr);
 
 public:
 
@@ -34,8 +41,7 @@ public:
 	bool isSolved();
 
 	~Board();
-private:
-    Tile* get(int row, int col);
-    void set(int row, int col, Tile * ptr);
+
+
 };
 
