@@ -4,10 +4,15 @@
 #include <vector>
 #include "Tile.h"
 
+// 0 1 2
+// 3 4 5
+// 6 7 8
+
+
 class Board {
 
-	int size = 3;
-	std::vector<std::vector<Tile>> tileVec;
+	int sideLen = 3;
+	std::vector<Tile*> tileVec;
 
 
 public:
@@ -16,7 +21,7 @@ public:
 		UP,
 		DOWN,
 		LEFT,
-		Right
+		RIGHT
 	};
 
 	Board(); //Default Constructor
@@ -28,5 +33,8 @@ public:
 
 
 	~Board();
+private:
+    Tile* get(int row, int col);
+    void set(int row, int col, Tile * ptr);
 };
 
