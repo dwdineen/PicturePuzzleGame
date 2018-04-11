@@ -1,14 +1,13 @@
 #include <SFML\Graphics.hpp>
 #include <iostream>
+#include "Tile.h"
 
 
 int main() {
 
 	sf::RenderWindow window(sf::VideoMode(512, 512), "Puzzle Game!", sf::Style::Close | sf::Style::Titlebar);
 	
-	int a = 5;
-	int & b = a;
-	std::cout << a << " " << b << std::endl;
+	Tile t(1, 2, 3, 512, &window, sf::Color::Red);
 
 
 	while (window.isOpen()) {
@@ -24,6 +23,13 @@ int main() {
 
 		}
 		
+		// Clear window
+		window.clear(sf::Color::Black);
+
+		t.draw();
+		window.display();
+
+
 	}
 
 

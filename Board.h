@@ -19,7 +19,7 @@ class Board {
 	// Holds a pointer to the last tile that was moved
 	Tile * lastMoved;
 
-	sf::Window & window;
+	sf::RenderWindow * window;
 
 	bool swap(int row1, int col1, int row2, int col2);
 
@@ -35,8 +35,8 @@ public:
 		RIGHT
 	};
 
-	Board(sf::Window & win); //Default Constructor
-	Board(sf::Window & win, int n, std::string pName); //with board size and picture
+	Board(sf::RenderWindow * win); //Default Constructor
+	Board(sf::RenderWindow * win, int n, std::string pName); //with board size and picture
 
 	bool move(Dir direction);
 	void shuffle(int n = 200); //Make n random moves

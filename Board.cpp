@@ -22,12 +22,11 @@ bool Board::swap(int row1, int col1, int row2, int col2) {
 	return true;
 }
 
-Board::Board(sf::Window & win) { Board(win, 3, "CHANGE_LATER"); }
+Board::Board(sf::RenderWindow * win) { Board(win, 3, "CHANGE_LATER"); }
 
-Board::Board(sf::Window & win, int n, std::string pName) {
+Board::Board(sf::RenderWindow * win, int n, std::string pName) {
 
 	window = win;
-
 	sideLen = n;
 	tileVec = std::vector<Tile*>(n*n);
 
@@ -55,6 +54,8 @@ bool Board::move(Dir direction) {
 					return swap(r, c, r - 1 , c);
 				case Dir::RIGHT:
 					return swap(r, c, r, c + 1);
+				default:
+					assert(false);
 				}
 
             }
