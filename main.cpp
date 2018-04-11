@@ -4,20 +4,26 @@
 
 int main() {
 
-	sf::RenderWindow window(sf::VideoMode(250, 250), "SFML works!");
-	sf::CircleShape shape(100.f);
-	shape.setFillColor(sf::Color::Red);
+	sf::RenderWindow window(sf::VideoMode(512, 512), "Puzzle Game!", sf::Style::Close | sf::Style::Titlebar);
+	
+	int a = 5;
+	int & b = a;
+	std::cout << a << " " << b << std::endl;
+
 
 	while (window.isOpen()) {
-		sf::Event event;
-		while (window.pollEvent(event)) {
-			if (event.type == sf::Event::Closed)
-				window.close();
-		}
+	
+		sf::Event evnt;
+		while (window.pollEvent(evnt)) {
 
-		window.clear();
-		window.draw(shape);
-		window.display();
+			switch (evnt.type) {
+			case sf::Event::Closed:
+				window.close();
+				break;
+			}
+
+		}
+		
 	}
 
 

@@ -1,3 +1,4 @@
+#include <SFML\Graphics.hpp>
 #include "Board.h"
 
 
@@ -9,21 +10,24 @@ bool Board::swap(int row1, int col1, int row2, int col2) {
 	if (col2 < 0 || col2 > sideLen) return false;
 
 	//asserts that at least one of the tiles is empty
-	assert(get(row1, col1)->getType() == Tile::EMPTY || get(row2, col2)->getType() == Tile::EMPTY);
+	assert(get(row1, col1)->getType() == Tile::Type::EMPTY || get(row2, col2)->getType() == Tile::Type::EMPTY);
 
 	Tile * temp = get(row1, col1);
 	set(row1, col1, get(row2, col2));
 	set(row2, col2, temp);
 
-	lastMoved = (get(row1, col1)->getType() == Tile::NORMAL) 
+	lastMoved = (get(row1, col1)->getType() == Tile::Type::NORMAL) 
 		? get(row1, col1) : get(row2, col2);
 
 	return true;
 }
 
-Board::Board() { Board(3, "CHANGE_LATER"); }
+Board::Board(sf::Window & win) { Board(win, 3, "CHANGE_LATER"); }
 
-Board::Board(int n, std::string pName) {
+Board::Board(sf::Window & win, int n, std::string pName) {
+
+	window = win;
+
 	sideLen = n;
 	tileVec = std::vector<Tile*>(n*n);
 

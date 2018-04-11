@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include <SFML\Graphics.hpp>
 #include "Tile.h"
 
 // 0 1 2
@@ -18,6 +19,7 @@ class Board {
 	// Holds a pointer to the last tile that was moved
 	Tile * lastMoved;
 
+	sf::Window & window;
 
 	bool swap(int row1, int col1, int row2, int col2);
 
@@ -26,15 +28,15 @@ class Board {
 
 public:
 
-	enum Dir {
+	enum class Dir {
 		UP,
 		DOWN,
 		LEFT,
 		RIGHT
 	};
 
-	Board(); //Default Constructor
-	Board(int n, std::string pName); //with board size and picture
+	Board(sf::Window & win); //Default Constructor
+	Board(sf::Window & win, int n, std::string pName); //with board size and picture
 
 	bool move(Dir direction);
 	void shuffle(int n = 200); //Make n random moves

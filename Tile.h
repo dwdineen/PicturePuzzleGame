@@ -6,13 +6,14 @@ class Tile {
 
 public:
 
-	enum Type {
+	enum class Type {
 		NORMAL,
 		EMPTY,
 	};
 
 private:
 
+	// Position
 	double x;
 	double y;
 
