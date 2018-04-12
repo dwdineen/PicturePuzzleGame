@@ -19,6 +19,9 @@ class Board {
 	// Holds a pointer to the last tile that was moved
 	Tile * lastMoved;
 
+	Tile * blank;
+	std::pair<int, int> blankCoords();
+
 	sf::RenderWindow * window;
 
 	bool swap(int row1, int col1, int row2, int col2);
@@ -28,19 +31,15 @@ class Board {
 
 public:
 
-	enum class Dir {
-		UP,
-		DOWN,
-		LEFT,
-		RIGHT
-	};
-
 	Board(sf::RenderWindow * win); //Default Constructor
 	Board(sf::RenderWindow * win, int n, std::string pName); //with board size and picture
 
-	bool move(Dir direction);
+	bool move(sfu::Dir direction);
 	void shuffle(int n = 200); //Make n random moves
 	bool isSolved();
+
+	void update();
+	void draw();
 
 	~Board();
 
