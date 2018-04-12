@@ -1,8 +1,6 @@
 #include <SFML\Graphics.hpp>
 #include "Board.h"
 
-
-
 bool Board::swap(int row1, int col1, int row2, int col2) {
 	if (row1 < 0 || row1 > sideLen) return false;
 	if (col1 < 0 || col1 > sideLen) return false;
@@ -28,15 +26,15 @@ Board::Board(sf::RenderWindow * win, int n, std::string pName) {
 
 	window = win;
 	sideLen = n;
-	tileVec = std::vector<Tile*>(n*n);
+	tileVec = std::vector<Tile*>(n*n, nullptr);
 
 	for (int i = 0; i < n * n - 1; i++) {
 		//Get the portion of image to put on tile
 		//...
-		tileVec[i] = new Tile(/* ... */);
+		//tileVec[i] = new Tile();
 	}
 
-	tileVec[n*n - 1] = new Tile(true);
+	tileVec[n*n - 1] = new Tile(true, win);
 }
 
 bool Board::move(Dir direction) {
@@ -61,6 +59,8 @@ bool Board::move(Dir direction) {
             }
         }
     }
+
+	return false;
 
 }
 

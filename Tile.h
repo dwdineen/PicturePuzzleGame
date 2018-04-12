@@ -2,6 +2,7 @@
 
 #include <cassert>
 #include <SFML\Graphics.hpp>
+#include "SFMLUtilities.h"
 
 class Tile {
 public:
@@ -14,31 +15,33 @@ public:
 private:
 
 	// Position
-	float x;
-	float y;
 	float sideLen;
 
 	Type type;
 
 	sf::RectangleShape rect;
-
 	sf::RenderWindow * window;
 
-	//void setX(float x) { this->x = x; }
-	//void setY(float y) { this->y = y; }
+	//For movement:
+	sfu::DragNDrop dnd;
+
+	sf::Vector2f size() { return rect.getSize(); }
+	sf::Vector2f pos() { return rect.getPosition(); }
 
 public:
 	
 
-	float getX() { return x; }
-	float getY() { return y; }
+	//float getX() { return rect.getPosition[0]; }
+	//float getY() { return rect.getPosition[1]; }
 
 	Type getType() { return type; }
 
 	void draw();
+	void update();
 
-	Tile();
-	Tile(bool isEmpty) : type(Type::EMPTY) { assert(isEmpty); }
+	Tile(bool isEmpty, sf::RenderWindow * win) : type(Type::EMPTY), 
+		window(win) { assert(isEmpty); }
+
 	Tile(int row, int col, int sideLen, float boardSide, 
 		sf::RenderWindow *, sf::Color color);
 

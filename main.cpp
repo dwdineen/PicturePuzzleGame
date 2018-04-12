@@ -26,6 +26,7 @@ int main() {
 		// Clear window
 		window.clear(sf::Color::Black);
 
+		t.update();
 		t.draw();
 		window.display();
 
