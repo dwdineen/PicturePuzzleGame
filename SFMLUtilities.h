@@ -9,6 +9,8 @@ namespace sfu {
 
 	//TODO: Write a nicely worded comment or two
 	sf::Vector2f mousePosf(const sf::RenderWindow & win);
+	
+	sf::Vector2f boundRect(const sf::RectangleShape & rect, const sf::FloatRect & bound);
 
 	//TODO: Write a nicely worded comment or two
 	class DragNDrop {
@@ -27,7 +29,6 @@ namespace sfu {
 	public:
 		DragNDrop() : isBeingMoved(false), lastState(State::DOWN) {};
 
-		//This is absolutely terrible style :)
 		State update(sf::RectangleShape & rect, const sf::RenderWindow & win);
 	};
 

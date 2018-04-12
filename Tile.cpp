@@ -29,6 +29,7 @@ void Tile::draw() {
 void Tile::update() {
 
 	dnd.update(rect, *window);
+	rect.setPosition(sfu::boundRect(rect, sf::FloatRect(sf::Vector2f(30, 30), sf::Vector2f(300, 300))));
 
 }
 
