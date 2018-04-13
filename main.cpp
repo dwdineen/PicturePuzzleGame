@@ -8,7 +8,7 @@ int main() {
 
 	sf::RenderWindow window(sf::VideoMode(512, 512), "Puzzle Game!", sf::Style::Close | sf::Style::Titlebar);
 	
-	Board b(&window, 3, "");
+	Board b(&window, 3, 512, "");
 
 
 	while (window.isOpen()) {

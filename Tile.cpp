@@ -21,7 +21,6 @@ Tile::Tile(int row, int col, int sideLen, float boardSide,
 	//position and bound
 	rect.setPosition(sf::Vector2f(sideSize * col, sideSize * row));
 	resetBound();
-	setOriginalPos(pos());
 	MAX_XY_POS = boardSide - sideSize;
 }
 

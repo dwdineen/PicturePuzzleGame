@@ -23,6 +23,7 @@ namespace sfu {
 	//TODO: Write a nicely worded comment or two
 	sf::Vector2f mousePosf(const sf::RenderWindow & win);
 	
+	//Returns nearest position within bounds
 	sf::Vector2f boundRect(const sf::RectangleShape & rect, const sf::FloatRect & bound);
 
 	sf::FloatRect concatRects(const sf::RectangleShape & rect1, const sf::RectangleShape & rect2);

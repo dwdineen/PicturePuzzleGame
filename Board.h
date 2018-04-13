@@ -12,7 +12,10 @@
 
 class Board {
 
-	int sideLen = 3;
+	//BoardSize
+	float boardSideSize;
+
+	int numTilesPerSide = 3;
 	std::string imageStr;
 	std::vector<Tile*> tileVec;
 
@@ -24,15 +27,18 @@ class Board {
 
 	sf::RenderWindow * window;
 
-	bool swap(int row1, int col1, int row2, int col2);
+	bool swap(int norm_row, int norm_col, int blank_row, int blank_col);
+	void updateBounds();
 
 	Tile * get(int row, int col);
 	void set(int row, int col, Tile * ptr);
 
+	sf::Vector2f getOriginalPos(int row, int col);
+
 public:
 
-	Board(sf::RenderWindow * win); //Default Constructor
-	Board(sf::RenderWindow * win, int n, std::string pName); //with board size and picture
+	//Board(sf::RenderWindow * win); //Default Constructor
+	Board(sf::RenderWindow * win, int n, float board_size, std::string pName); //with board size and picture
 
 	bool move(sfu::Dir direction);
 	void shuffle(int n = 200); //Make n random moves
