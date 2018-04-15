@@ -148,8 +148,10 @@ bool Board::move(sfu::Dir direction) {
 }
 
 void Board::shuffle(int n) {
-
-
+    for (int i = 0; i < n; ++i) {
+        int d = rand() % 4;
+        move(sfu::Dir(d));
+    }
 }
 
 bool Board::isSolved() {

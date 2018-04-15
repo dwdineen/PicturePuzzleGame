@@ -31,13 +31,17 @@ int main() {
 		bool Down = sf::Keyboard::isKeyPressed(sf::Keyboard::Down);
 		bool Left = sf::Keyboard::isKeyPressed(sf::Keyboard::Left);
 		bool Right = sf::Keyboard::isKeyPressed(sf::Keyboard::Right);
+        bool Shuffle = sf::Keyboard::isKeyPressed(sf::Keyboard::S);
+
 
 		if (Up && !keyPressLastFrame) b.move(sfu::Dir::UP);
 		else if (Down && !keyPressLastFrame) b.move(sfu::Dir::DOWN);
 		else if (Left && !keyPressLastFrame) b.move(sfu::Dir::LEFT);
 		else if (Right && !keyPressLastFrame) b.move(sfu::Dir::RIGHT);
+        else if (Shuffle && !keyPressLastFrame) b.shuffle();
 
-		keyPressLastFrame = Up || Down || Left || Right;
+
+		keyPressLastFrame = Up || Down || Left || Right || Shuffle;
 
 		// Clear window
 		window.clear(sf::Color::Black);
