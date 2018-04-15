@@ -29,6 +29,7 @@ class Board {
 
 	bool swap(int norm_row, int norm_col, int blank_row, int blank_col);
 	void updateBounds();
+	void centerAllTiles();
 
 	Tile * get(int row, int col);
 	void set(int row, int col, Tile * ptr);

@@ -30,10 +30,10 @@ std::pair<int, int> Board::blankCoords() {
 }
 
 bool Board::swap(int norm_row, int norm_col, int blank_row, int blank_col) {
-	if (norm_row < 0 || norm_row > numTilesPerSide) return false;
-	if (norm_col < 0 || norm_col > numTilesPerSide) return false;
-	if (blank_row < 0 || blank_row > numTilesPerSide) return false;
-	if (blank_col < 0 || blank_col > numTilesPerSide) return false;
+	if (norm_row < 0 || norm_row >= numTilesPerSide) return false;
+	if (norm_col < 0 || norm_col >= numTilesPerSide) return false;
+	if (blank_row < 0 || blank_row >= numTilesPerSide) return false;
+	if (blank_col < 0 || blank_col >= numTilesPerSide) return false;
 
 	//asserts that at least one of the tiles is empty
 	assert(get(blank_row, blank_col)->getType() == Tile::Type::EMPTY);
@@ -79,6 +79,14 @@ void Board::updateBounds() {
 
 }
 
+void Board::centerAllTiles() {
+	for (int r = 0; r < numTilesPerSide; ++r) {
+		for (int c = 0; c < numTilesPerSide; ++c) {
+			get(r, c)->setPos(getOriginalPos(r, c));
+		}
+	}
+}
+
 //Board::Board(sf::RenderWindow * win) { Board(win, 3, "CHANGE_LATER"); }
 
 Board::Board(sf::RenderWindow * win, int n, float sideSize, std::string pName) :
@@ -110,6 +118,9 @@ Board::Board(sf::RenderWindow * win, int n, float sideSize, std::string pName) :
 
 bool Board::move(sfu::Dir direction) {
     
+	centerAllTiles();
+	lastMoved = nullptr;
+
     for (int r = 0; r < numTilesPerSide; ++r) {
         for (int c = 0; c < numTilesPerSide; ++c) {
             if (get(r, c)->getType() == Tile::Type::EMPTY) {
@@ -150,16 +161,24 @@ void Board::update() {
 		for (int col = 0; col < numTilesPerSide; col++) {
 
 			auto x = tileVec[numTilesPerSide * row + col];
+
+			if (lastMoved && lastMoved != x) continue;
 			if (x->getType() == Tile::Type::EMPTY) continue;
 
 			sfu::DragNDrop::State state = x->update();
 
-			bool b = state == sfu::DragNDrop::State::LOWERED;
-			if (b && sfu::pointsClose(x->pos(), blank->pos(), .01)) {
+			bool L = state == sfu::DragNDrop::State::LOWERED;
+			bool R = state == sfu::DragNDrop::State::RAISED;
+
+			if (L && sfu::pointsClose(x->pos(), blank->pos(), .01)) {
 				auto bCoords = blankCoords();
 				swap(row, col, bCoords.first, bCoords.second);
+				lastMoved = nullptr;
+			} else if (L && sfu::pointsClose(x->pos(), getOriginalPos(row, col), .01)) {
+				lastMoved = nullptr;
 			}
 
+			if (R) lastMoved = x;
 		}
 	}
 }
